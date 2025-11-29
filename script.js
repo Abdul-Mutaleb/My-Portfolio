@@ -97,7 +97,8 @@ updateActiveNavLink();
 // Testimonials Carousel
 // ===========================
 class TestimonialsCarousel {
-    constructor() {
+    constructor(testimonials) {
+        this.testimonials = testimonials;
         this.currentIndex = 0;
         this.isAutoPlay = true;
         this.autoPlayInterval = null;
@@ -112,10 +113,10 @@ class TestimonialsCarousel {
     }
 
     renderTestimonial() {
-        const testimonial = testimonials[this.currentIndex];
+        const testimonial = this.testimonials[this.currentIndex];
         const card = document.getElementById('testimonialCard');
 
-        const starsHTML = Array.from({ length: testimonial.rating }, () => 
+        const starsHTML = Array.from({ length: testimonial.rating }, () =>
             '<i class="fas fa-star"></i>'
         ).join('');
 
@@ -123,13 +124,13 @@ class TestimonialsCarousel {
             <div class="stars mb-4">
                 ${starsHTML}
             </div>
-            <p class="testimonial-text" id="testimonialText">"${testimonial.content}"</p>
+            <p class="testimonial-text">"${testimonial.content}"</p>
             <div class="testimonial-author">
-                <img id="authorImage" src="${testimonial.image}" alt="${testimonial.name}" class="author-image">
+                <img src="${testimonial.image}" alt="${testimonial.name}" class="author-image">
                 <div class="author-info">
-                    <h5 id="authorName">${testimonial.name}</h5>
-                    <p id="authorTitle">${testimonial.title}</p>
-                    <p id="authorCompany">${testimonial.company}</p>
+                    <h5>${testimonial.name}</h5>
+                    <p>${testimonial.title}</p>
+                    <p>${testimonial.company}</p>
                 </div>
             </div>
         `;
@@ -142,32 +143,42 @@ class TestimonialsCarousel {
         const dotsContainer = document.getElementById('dotsContainer');
         const gridContainer = document.getElementById('testimonialsGrid');
 
-        // Render dots
-        dotsContainer.innerHTML = testimonials.map((_, idx) => 
+        // Dots
+        dotsContainer.innerHTML = this.testimonials.map((_, idx) =>
             `<button class="dot ${idx === this.currentIndex ? 'active' : ''}" data-index="${idx}"></button>`
         ).join('');
 
-        // Render grid
-        gridContainer.innerHTML = testimonials.map((testimonial, idx) => `
+        // Grid
+        gridContainer.innerHTML = this.testimonials.map((t, idx) => `
             <div class="col-lg-4 col-md-6">
                 <div class="testimonial-item ${idx === this.currentIndex ? 'active' : ''}" data-index="${idx}">
                     <div class="testimonial-item-header">
-                        <img src="${testimonial.image}" alt="${testimonial.name}" class="testimonial-item-img">
+                        <img src="${t.image}" alt="${t.name}" class="testimonial-item-img">
                         <div>
-                            <p class="testimonial-item-name">${testimonial.name}</p>
-                            <p class="testimonial-item-company">${testimonial.company}</p>
+                            <p class="testimonial-item-name">${t.name}</p>
+                            <p class="testimonial-item-company">${t.company}</p>
                         </div>
                     </div>
                     <div class="stars">
-                        ${Array.from({ length: testimonial.rating }, () => 
-                            '<i class="fas fa-star"></i>'
-                        ).join('')}
+                        ${Array.from({ length: t.rating }, () => '<i class="fas fa-star"></i>').join('')}
                     </div>
                 </div>
             </div>
         `).join('');
+    }
 
-        // Attach grid click listeners
+    attachEventListeners() {
+        // Dots click
+        document.querySelectorAll('.dot').forEach(dot => {
+            dot.addEventListener('click', () => {
+                this.currentIndex = parseInt(dot.dataset.index);
+                this.isAutoPlay = false;
+                this.stopAutoPlay();
+                this.renderTestimonial();
+            });
+        });
+
+        // Grid click
         document.querySelectorAll('.testimonial-item').forEach(item => {
             item.addEventListener('click', () => {
                 this.currentIndex = parseInt(item.dataset.index);
@@ -177,15 +188,19 @@ class TestimonialsCarousel {
             });
         });
 
-        // Attach dots click listeners
-        document.querySelectorAll('.dot').forEach(dot => {
-            dot.addEventListener('click', () => {
-                this.currentIndex = parseInt(dot.dataset.index);
-                this.isAutoPlay = false;
-                this.stopAutoPlay();
-                this.renderTestimonial();
-            });
-        });
+        // Prev/Next buttons
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        if (prevBtn) prevBtn.addEventListener('click', () => this.prev());
+        if (nextBtn) nextBtn.addEventListener('click', () => this.next());
+
+        // Pause on hover
+        const nav = document.querySelector('.carousel-nav');
+        if (nav) {
+            nav.addEventListener('mouseenter', () => this.stopAutoPlay());
+            nav.addEventListener('mouseleave', () => this.startAutoPlay());
+        }
     }
 
     updateActiveDot() {
@@ -201,53 +216,32 @@ class TestimonialsCarousel {
     }
 
     next() {
-        this.currentIndex = (this.currentIndex + 1) % testimonials.length;
-        this.isAutoPlay = false;
-        this.stopAutoPlay();
+        this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
         this.renderTestimonial();
     }
 
     prev() {
-        this.currentIndex = (this.currentIndex - 1 + testimonials.length) % testimonials.length;
-        this.isAutoPlay = false;
-        this.stopAutoPlay();
+        this.currentIndex = (this.currentIndex - 1 + this.testimonials.length) % this.testimonials.length;
         this.renderTestimonial();
     }
 
     startAutoPlay() {
+        this.isAutoPlay = true;
+        if (this.autoPlayInterval) clearInterval(this.autoPlayInterval);
         this.autoPlayInterval = setInterval(() => {
-            if (this.isAutoPlay) {
-                this.currentIndex = (this.currentIndex + 1) % testimonials.length;
-                this.renderTestimonial();
-            }
+            if (this.isAutoPlay) this.next();
         }, 5000);
     }
 
     stopAutoPlay() {
-        if (this.autoPlayInterval) {
-            clearInterval(this.autoPlayInterval);
-        }
-    }
-
-    resumeAutoPlay() {
-        this.isAutoPlay = true;
-        this.startAutoPlay();
+        this.isAutoPlay = false;
+        if (this.autoPlayInterval) clearInterval(this.autoPlayInterval);
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const carousel = new TestimonialsCarousel();
-
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-
-    if(prevBtn && nextBtn){
-        prevBtn.addEventListener('click', () => carousel.prev());
-        nextBtn.addEventListener('click', () => carousel.next());
-    }
+    new TestimonialsCarousel(testimonials);
 });
-
-
 
 // Resume autoplay on mouse leave
 document.querySelector('.carousel-nav').addEventListener('mouseenter', () => {
@@ -377,7 +371,3 @@ window.onload = function() {
         // Reset the form fields when the page loads
         document.getElementById("form").reset();
     };
-
-
-
-
