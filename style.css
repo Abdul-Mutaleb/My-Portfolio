@@ -1057,6 +1057,38 @@ body {
     .contact-form-wrapper {
         animation-delay: 0 !important;
     }
+
+    /* Row must stretch children */
+    .contact-row {
+        display: flex;
+        align-items: stretch;
+    }
+
+    /* Make both columns stretch */
+    .contact-row > [class*="col-"] {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Left side container stretch full height */
+    .contact-left {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    /* Contact cards auto expand equally */
+    .contact-card {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Right side form stretch */
+    .contact-form-wrapper {
+        flex: 1;
+        height: 100%;
+    }
 }
 
 @media (max-width: 576px) {
