@@ -613,177 +613,30 @@ body {
 }
 
 /* ===========================
-   Testimonials Section
+   Experience Section
    =========================== */
-.testimonials-section {
+
+.experience-section {
     position: relative;
     background: linear-gradient(180deg, transparent 0%, rgba(124, 58, 237, 0.05) 100%);
 }
 
-.testimonial-carousel {
-    width: 100%;
-}
-
-.testimonial-card {
+.experience-card {
     padding: 3rem 2rem;
     background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(51, 65, 85, 0.4));
     border: 1px solid var(--border-color);
     border-radius: 1.5rem;
     transition: var(--transition);
-    min-height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    min-height: 260px;
     animation: fadeIn 0.5s ease-out;
 }
 
-.testimonial-card:hover {
+.experience-card:hover {
     border-color: var(--primary-cyan);
     background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(51, 65, 85, 0.6));
     box-shadow: 0 30px 60px rgba(0, 217, 255, 0.2);
 }
 
-.stars {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.stars i {
-    font-size: 1.2rem;
-    color: #fbbf24;
-}
-
-.testimonial-text {
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    font-style: italic;
-    line-height: 1.8;
-    margin: 1rem 0;
-}
-
-.testimonial-author {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border-color);
-}
-
-.author-image {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: 2px solid var(--border-color);
-    object-fit: cover;
-}
-
-.author-info h5 {
-    color: var(--primary-cyan);
-    font-weight: 700;
-    margin-bottom: 0.25rem;
-}
-
-.author-info p {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    margin: 0;
-}
-
-.carousel-nav {
-    padding: 2rem 0;
-}
-
-.nav-btn {
-    width: 50px;
-    height: 50px;
-    border: 2px solid var(--border-color);
-    background: var(--bg-card);
-    color: var(--primary-cyan);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: var(--transition);
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.nav-btn:hover {
-    border-color: var(--primary-cyan);
-    background: rgba(0, 217, 255, 0.1);
-    transform: scale(1.1);
-}
-
-.carousel-dots {
-    display: flex;
-    gap: 0.75rem;
-    justify-content: center;
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(94, 109, 137, 0.5);
-    cursor: pointer;
-    transition: var(--transition);
-    border: 1px solid var(--border-color);
-}
-
-.dot.active {
-    width: 32px;
-    background: linear-gradient(90deg, var(--primary-cyan), var(--primary-purple));
-    border-color: var(--primary-cyan);
-}
-
-.testimonials-grid {
-    padding-top: 2rem;
-    border-top: 1px solid var(--border-color);
-}
-
-.testimonial-item {
-    padding: 1.5rem;
-    background: var(--bg-card);
-    border: 2px solid var(--border-color);
-    border-radius: 1rem;
-    transition: var(--transition);
-    cursor: pointer;
-}
-
-.testimonial-item:hover {
-    border-color: var(--primary-cyan);
-    background: rgba(0, 217, 255, 0.05);
-}
-
-.testimonial-item.active {
-    background: linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(124, 58, 237, 0.15));
-    border-color: var(--primary-cyan);
-}
-
-.testimonial-item-header {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-}
-
-.testimonial-item img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 1px solid var(--border-color);
-}
-
-.testimonial-item-name {
-    font-weight: 600;
-    color: var(--text-primary);
-    font-size: 0.9rem;
-}
-
-.testimonial-item-company {
-    color: var(--text-muted);
-    font-size: 0.8rem;
-}
 
 /* ===========================
    Contact Section
