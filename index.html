@@ -1,458 +1,612 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abdul Mutaleb | Full Stack Developer</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Abdul Mutaleb — Full Stack Developer</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f0faf8;--white:#fff;
+  --primary:#0d9488;--primary-dark:#0f766e;--primary-light:#5eead4;
+  --secondary:#059669;--accent:#14b8a6;--accent2:#10b981;
+  --text:#0f2922;--text2:#1e4d42;--muted:#5f8a82;
+  --border:#b2ddd8;--shadow:rgba(13,148,136,.12);--shadow2:rgba(13,148,136,.22);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+section{scroll-margin-top:80px}
+
+/* ══ NAVBAR ══ */
+.navbar{background:rgba(240,250,248,.96);backdrop-filter:blur(22px);border-bottom:1px solid var(--border);padding:13px 0;transition:all .3s;position:fixed;top:0;width:100%;z-index:999}
+.navbar.scrolled{box-shadow:0 4px 28px var(--shadow);padding:9px 0}
+.nav-brand{font-family:'Outfit',sans-serif;font-weight:900;font-size:1.55rem;letter-spacing:-1px;color:var(--primary)!important;text-decoration:none}
+.nav-brand span{color:var(--secondary)}
+.navbar-nav .nav-link{font-family:'Outfit',sans-serif;font-size:.83rem;font-weight:600;color:var(--muted)!important;padding:7px 13px!important;border-radius:8px;transition:all .2s;display:flex;align-items:center;gap:6px}
+.navbar-nav .nav-link i{font-size:.78rem}
+.navbar-nav .nav-link:hover,.navbar-nav .nav-link.active-link{color:var(--primary)!important;background:rgba(13,148,136,.09)}
+.dropdown-menu{border:1.5px solid var(--border);border-radius:14px;box-shadow:0 14px 44px var(--shadow2);padding:8px;background:#fff;min-width:230px;margin-top:6px!important}
+.dropdown-item{font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:600;color:var(--text2);border-radius:8px;padding:9px 14px;display:flex;align-items:center;gap:10px;transition:all .18s}
+.dropdown-item:hover{background:rgba(13,148,136,.08);color:var(--primary)}
+.di-icon{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,rgba(13,148,136,.12),rgba(16,185,129,.12));display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:.85rem;flex-shrink:0}
+.dropdown-divider{margin:4px 0;border-color:var(--border)}
+.btn-nav{font-family:'Outfit',sans-serif;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff!important;font-weight:700!important;border-radius:10px!important;padding:8px 22px!important;box-shadow:0 4px 14px var(--shadow2);transition:all .25s!important}
+.btn-nav:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--shadow2)!important}
+
+/* ══ HERO ══ */
+#home{min-height:100vh;display:flex;align-items:center;padding:110px 0 80px;background:linear-gradient(155deg,#d1f5ef 0%,#e8f7f4 35%,#f0faf8 65%,#d1faf4 100%);position:relative;overflow:hidden}
+#home::before{content:'';position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(94,234,212,.22),transparent 70%);top:-200px;right:-150px;pointer-events:none}
+#home::after{content:'';position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,.14),transparent 70%);bottom:-100px;left:-80px;pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:100px;padding:6px 16px 6px 10px;margin-bottom:28px;box-shadow:0 2px 12px var(--shadow)}
+.badge-dot{width:8px;height:8px;border-radius:50%;background:var(--accent2);animation:ping 2s infinite}
+@keyframes ping{0%,100%{box-shadow:0 0 0 3px rgba(16,185,129,.25)}50%{box-shadow:0 0 0 7px rgba(16,185,129,.07)}}
+.badge-text{font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:600;color:var(--primary)}
+.hero-title{font-family:'Outfit',sans-serif;font-size:clamp(2.6rem,6.5vw,5rem);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:12px}
+.hero-title .name-color{background:linear-gradient(135deg,var(--primary),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-role{font-family:'Fira Code',monospace;font-size:.97rem;color:var(--muted);margin-bottom:22px;display:flex;align-items:center;gap:8px}
+.role-prefix{color:var(--primary-light);font-weight:500}
+#typed{color:var(--primary);font-weight:500}
+.cursor-blink{animation:blink .8s infinite;color:var(--primary)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero-desc{font-family:'Outfit',sans-serif;font-size:.97rem;line-height:1.8;color:var(--muted);max-width:480px;margin-bottom:36px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:44px}
+.btn-primary-hero{font-family:'Outfit',sans-serif;font-weight:700;font-size:.88rem;padding:13px 28px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;border:none;text-decoration:none;box-shadow:0 6px 22px var(--shadow2);transition:all .3s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary-hero:hover{transform:translateY(-3px);box-shadow:0 12px 32px var(--shadow2);color:#fff}
+.btn-secondary-hero{font-family:'Outfit',sans-serif;font-weight:600;font-size:.88rem;padding:12px 24px;border-radius:12px;background:#fff;color:var(--primary);border:1.5px solid var(--border);text-decoration:none;transition:all .3s;box-shadow:0 2px 10px var(--shadow);display:inline-flex;align-items:center;gap:8px}
+.btn-secondary-hero:hover{border-color:var(--primary);background:rgba(13,148,136,.04);color:var(--primary-dark)}
+.hero-stats{display:flex;background:#fff;border-radius:16px;border:1px solid var(--border);overflow:hidden;box-shadow:0 4px 20px var(--shadow);width:fit-content}
+.stat-box{padding:16px 26px;text-align:center;border-right:1px solid var(--border)}
+.stat-box:last-child{border-right:none}
+.stat-icon{font-size:1.2rem;color:var(--primary);margin-bottom:4px;display:block}
+.stat-n{font-family:'Outfit',sans-serif;font-size:1.7rem;font-weight:900;letter-spacing:-1px;display:block;background:linear-gradient(135deg,var(--primary),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-l{font-family:'Fira Code',monospace;font-size:.63rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:2px}
+
+/* ══ HERO IMAGE — Static Avatar ══ */
+.hero-img-wrap{position:relative;display:flex;align-items:center;justify-content:center}
+.hero-img-ring{width:340px;height:340px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent2),var(--secondary));padding:5px;box-shadow:0 20px 60px var(--shadow2);position:relative}
+.hero-img-ring::before{content:'';position:absolute;inset:-14px;border-radius:50%;border:2px dashed var(--primary-light);opacity:.5;animation:spin-slow 18s linear infinite}
+@keyframes spin-slow{to{transform:rotate(360deg)}}
+.hero-img-ring::after{content:'';position:absolute;inset:-28px;border-radius:50%;border:1px solid rgba(94,234,212,.22)}
+.hero-img-inner{width:100%;height:100%;border-radius:50%;overflow:hidden;background:linear-gradient(160deg,#b2ede7,#d1faf4);display:flex;align-items:flex-end;justify-content:center;position:relative}
+.avatar-name-badge{position:absolute;top:18px;left:50%;transform:translateX(-50%);background:rgba(13,148,136,.18);border:1.5px solid rgba(255,255,255,.35);border-radius:100px;padding:4px 14px;font-family:'Fira Code',monospace;font-size:.65rem;font-weight:600;color:#fff;white-space:nowrap;letter-spacing:.07em;backdrop-filter:blur(8px);z-index:2}
+.float-badge{position:absolute;background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:9px 14px;font-family:'Fira Code',monospace;font-size:.75rem;font-weight:700;color:var(--text2);box-shadow:0 6px 20px var(--shadow);display:flex;align-items:center;gap:8px;white-space:nowrap;animation:fbFloat 3.5s ease-in-out infinite}
+.float-badge i{color:var(--primary);font-size:1.05rem}
+@keyframes fbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.fb1{top:28px;left:-30px;animation-delay:0s}
+.fb2{top:28px;right:-30px;animation-delay:1.2s}
+.fb3{bottom:38px;left:-22px;animation-delay:.6s}
+.fb4{bottom:38px;right:-22px;animation-delay:1.8s}
+
+/* ══ SECTION COMMON ══ */
+.sec-label{font-family:'Fira Code',monospace;font-size:.72rem;font-weight:500;color:var(--primary);letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.sec-label::before{content:'//';color:var(--primary-light)}
+.sec-title{font-family:'Outfit',sans-serif;font-size:clamp(1.9rem,4vw,2.9rem);font-weight:900;letter-spacing:-1.5px;color:var(--text);line-height:1.1;margin-bottom:14px}
+.sec-title span{background:linear-gradient(135deg,var(--primary),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.divider{width:56px;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--primary),var(--accent2));margin-bottom:20px}
+
+/* ══ SERVICES ══ */
+#services{padding:110px 0;background:#fff}
+.srv-card{background:var(--bg);border:1.5px solid var(--border);border-radius:20px;padding:32px 24px;transition:all .32s;height:100%;position:relative;overflow:hidden}
+.srv-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent2));transform:scaleX(0);transform-origin:left;transition:transform .32s}
+.srv-card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 18px 44px var(--shadow)}
+.srv-card:hover::before{transform:scaleX(1)}
+.srv-icon-wrap{width:62px;height:62px;border-radius:16px;background:linear-gradient(135deg,var(--primary),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;margin-bottom:18px;box-shadow:0 6px 18px var(--shadow2)}
+.srv-title{font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:800;color:var(--text);margin-bottom:8px}
+.srv-desc{font-family:'Outfit',sans-serif;font-size:.8rem;line-height:1.75;color:var(--muted);margin-bottom:16px}
+.srv-list{list-style:none;padding:0;margin:0}
+.srv-list li{font-family:'Fira Code',monospace;font-size:.75rem;color:var(--text2);padding:5px 0;border-bottom:1px dashed var(--border);display:flex;align-items:center;gap:8px}
+.srv-list li:last-child{border-bottom:none}
+.srv-list li i{color:var(--primary);font-size:.75rem;flex-shrink:0}
+
+/* ══ ABOUT ══ */
+#about{padding:110px 0;background:linear-gradient(160deg,#e8f7f4,#f0faf8)}
+.about-img-wrap{background:#fff;border-radius:24px;border:1.5px solid var(--border);box-shadow:0 12px 40px var(--shadow);overflow:hidden}
+.about-img-top{background:linear-gradient(135deg,var(--primary),var(--accent2));padding:36px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.about-avatar{width:110px;height:110px;border-radius:50%;border:3px solid rgba(255,255,255,.5);overflow:hidden;background:linear-gradient(160deg,#b2ede7,#d1faf4);display:flex;align-items:flex-end;justify-content:center}
+.about-name{font-family:'Outfit',sans-serif;font-size:1.25rem;font-weight:800;color:#fff}
+.about-role-lbl{font-family:'Fira Code',monospace;font-size:.76rem;color:rgba(255,255,255,.8)}
+.about-info-item{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:1px solid var(--border);font-size:.81rem}
+.about-info-item:last-child{border-bottom:none}
+.aii-key{font-family:'Fira Code',monospace;color:var(--muted);font-weight:500;display:flex;align-items:center;gap:7px}
+.aii-key i{color:var(--primary);width:14px;text-align:center}
+.aii-val{font-family:'Outfit',sans-serif;color:var(--text);font-weight:700}
+.about-text p{font-family:'Outfit',sans-serif;font-size:.9rem;line-height:1.85;color:var(--muted);margin-bottom:1rem}
+.about-highlight{font-family:'Outfit',sans-serif;background:linear-gradient(135deg,rgba(13,148,136,.07),rgba(16,185,129,.07));border-left:4px solid var(--primary);border-radius:0 12px 12px 0;padding:14px 18px;margin:18px 0;font-size:.86rem;line-height:1.75;color:var(--text2);display:flex;align-items:flex-start;gap:10px;font-weight:500}
+.about-highlight i{color:var(--primary);margin-top:3px;flex-shrink:0}
+
+/* ══ EDUCATION ══ */
+#education{padding:110px 0;background:#fff}
+.edu-timeline{position:relative;padding-left:0}
+.edu-timeline::before{content:'';position:absolute;left:28px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--primary),var(--accent2),var(--primary-light));border-radius:2px}
+.edu-item{display:flex;gap:24px;margin-bottom:44px;position:relative}
+.edu-item:last-child{margin-bottom:0}
+.edu-dot{width:58px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;padding-top:4px}
+.edu-dot-circle{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent2));display:flex;align-items:center;justify-content:center;color:#fff;font-size:.95rem;box-shadow:0 4px 14px var(--shadow2);border:3px solid #fff;z-index:1;position:relative;flex-shrink:0}
+.edu-card{background:var(--bg);border:1.5px solid var(--border);border-radius:18px;padding:26px 24px;flex:1;transition:all .3s;position:relative;overflow:hidden}
+.edu-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent2));transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.edu-card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 14px 38px var(--shadow)}
+.edu-card:hover::before{transform:scaleX(1)}
+.edu-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.edu-degree{font-family:'Outfit',sans-serif;font-size:1rem;font-weight:800;color:var(--text);letter-spacing:-.3px}
+.edu-year{font-family:'Fira Code',monospace;display:inline-flex;align-items:center;gap:5px;font-size:.7rem;font-weight:700;padding:4px 12px;border-radius:100px;background:linear-gradient(135deg,rgba(13,148,136,.12),rgba(16,185,129,.12));color:var(--primary);border:1px solid rgba(13,148,136,.2);white-space:nowrap}
+.edu-year i{font-size:.65rem}
+.edu-school{font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:700;color:var(--primary);margin-bottom:6px;display:flex;align-items:center;gap:7px}
+.edu-school i{font-size:.82rem}
+.edu-dept{font-family:'Fira Code',monospace;font-size:.75rem;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:7px}
+.edu-dept i{font-size:.75rem;color:var(--muted)}
+.edu-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.edu-tag{font-family:'Fira Code',monospace;font-size:.65rem;font-weight:600;padding:3px 10px;border-radius:100px;background:rgba(13,148,136,.08);color:var(--primary);border:1px solid rgba(13,148,136,.15);display:flex;align-items:center;gap:4px}
+.edu-tag i{font-size:.6rem}
+.edu-result{font-family:'Fira Code',monospace;display:inline-flex;align-items:center;gap:6px;font-size:.75rem;font-weight:700;color:var(--secondary)}
+.edu-result i{font-size:.75rem}
+.cert-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:20px}
+.cert-card{background:var(--bg);border:1.5px solid var(--border);border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:14px;transition:all .3s;flex:1;min-width:220px}
+.cert-card:hover{border-color:var(--accent);box-shadow:0 8px 24px var(--shadow);transform:translateY(-3px)}
+.cert-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--accent2));display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;flex-shrink:0}
+.cert-name{font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:2px}
+.cert-issuer{font-family:'Fira Code',monospace;font-size:.7rem;color:var(--muted);display:flex;align-items:center;gap:4px}
+.cert-issuer i{font-size:.65rem}
+
+/* ══ SKILLS ══ */
+#skills{padding:110px 0;background:linear-gradient(160deg,#e8f7f4,#f0faf8)}
+.skill-card{background:#fff;border:1.5px solid var(--border);border-radius:18px;padding:22px 18px;transition:all .3s;position:relative;overflow:hidden;height:100%}
+.skill-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent2));transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.skill-card:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 14px 38px var(--shadow)}
+.skill-card:hover::before{transform:scaleX(1)}
+.sk-icon-wrap{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.35rem;margin-bottom:14px;box-shadow:0 4px 14px var(--shadow)}
+.sk-name{font-family:'Outfit',sans-serif;font-size:.97rem;font-weight:700;color:var(--text);margin-bottom:3px}
+.sk-cat{font-family:'Fira Code',monospace;font-size:.67rem;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+.sk-pct{font-family:'Fira Code',monospace;font-size:.72rem;color:var(--primary);font-weight:500;float:right;margin-bottom:4px}
+.sk-bar{height:5px;background:var(--border);border-radius:5px;overflow:hidden}
+.sk-fill{height:100%;border-radius:5px;width:0;transition:width 1.3s cubic-bezier(.4,0,.2,1)}
+
+/* ══ PROJECTS ══ */
+#projects{padding:110px 0;background:#fff}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:38px}
+.filter-btn{font-family:'Fira Code',monospace;font-size:.78rem;font-weight:600;padding:8px 18px;border-radius:10px;background:var(--bg);border:1.5px solid var(--border);color:var(--muted);cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:7px}
+.filter-btn i{font-size:.78rem}
+.filter-btn.active,.filter-btn:hover{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;border-color:transparent;box-shadow:0 4px 14px var(--shadow2)}
+.proj-card{background:#fff;border:1.5px solid var(--border);border-radius:20px;overflow:hidden;height:100%;transition:all .3s}
+.proj-card:hover{transform:translateY(-6px);box-shadow:0 18px 50px var(--shadow2);border-color:var(--accent)}
+.proj-thumb{height:185px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.proj-thumb-icon{position:relative;z-index:1;width:72px;height:72px;border-radius:20px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:#fff;font-size:2rem;border:2px solid rgba(255,255,255,.3)}
+.proj-overlay{position:absolute;inset:0;background:rgba(13,148,136,.9);display:flex;align-items:center;justify-content:center;gap:12px;opacity:0;transition:opacity .3s}
+.proj-card:hover .proj-overlay{opacity:1}
+.ov-btn{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.5);color:#fff;text-decoration:none;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .2s}
+.ov-btn:hover{background:#fff;color:var(--primary)}
+.proj-body{padding:20px}
+.proj-cat-tag{font-family:'Fira Code',monospace;font-size:.63rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--primary);margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.proj-name{font-family:'Outfit',sans-serif;font-size:.98rem;font-weight:800;color:var(--text);margin-bottom:7px}
+.proj-desc{font-family:'Outfit',sans-serif;font-size:.76rem;line-height:1.7;color:var(--muted);margin-bottom:12px}
+.proj-tags{display:flex;flex-wrap:wrap;gap:5px}
+.ptag{font-family:'Fira Code',monospace;font-size:.63rem;font-weight:600;padding:3px 10px;border-radius:100px;background:rgba(13,148,136,.08);color:var(--primary);border:1px solid rgba(13,148,136,.15)}
+
+/* ══ CONTACT ══ */
+#contact{padding:110px 0;background:linear-gradient(160deg,#e8f7f4,#f0faf8)}
+.contact-card{background:#fff;border-radius:22px;border:1.5px solid var(--border);box-shadow:0 10px 36px var(--shadow);overflow:hidden;position:relative}
+.contact-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--accent2),var(--secondary))}
+.contact-body{padding:36px}
+.cf-label{font-family:'Fira Code',monospace;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.cf-label i{color:var(--primary);font-size:.75rem}
+.cf-input,.cf-textarea{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:12px;font-family:'Outfit',sans-serif;font-size:.87rem;color:var(--text);padding:12px 15px;outline:none;transition:all .2s;resize:none}
+.cf-input:focus,.cf-textarea:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(13,148,136,.1);background:#fff}
+.cf-input::placeholder,.cf-textarea::placeholder{color:#c5dbd8;font-family:'Outfit',sans-serif}
+.btn-send{width:100%;padding:14px;border-radius:12px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:700;box-shadow:0 6px 22px var(--shadow2);transition:all .3s;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-send:hover{transform:translateY(-2px);box-shadow:0 10px 28px var(--shadow2)}
+.cinfo-row{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--border)}
+.cinfo-row:last-of-type{border-bottom:none}
+.ci-icon{width:44px;height:44px;border-radius:12px;flex-shrink:0;background:linear-gradient(135deg,rgba(13,148,136,.1),rgba(16,185,129,.1));border:1px solid rgba(13,148,136,.2);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:1rem}
+.ci-lbl{font-family:'Fira Code',monospace;font-size:.63rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:600;margin-bottom:2px}
+.ci-val{font-family:'Outfit',sans-serif;font-size:.86rem;font-weight:600;color:var(--text)}
+.social-row{display:flex;gap:9px;margin-top:22px;flex-wrap:wrap}
+.soc-btn{font-family:'Fira Code',monospace;font-size:.73rem;font-weight:600;display:flex;align-items:center;gap:7px;padding:8px 14px;border-radius:10px;border:1.5px solid var(--border);color:var(--muted);text-decoration:none;background:#fff;transition:all .22s}
+.soc-btn:hover{border-color:var(--primary);color:var(--primary);background:rgba(13,148,136,.05)}
+.success-box{margin-top:12px;padding:12px 15px;border-radius:10px;font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:600;background:rgba(16,185,129,.1);border:1.5px solid rgba(16,185,129,.3);color:var(--secondary);display:none;align-items:center;gap:8px}
+
+/* ══ FOOTER ══ */
+footer{background:var(--text);color:rgba(255,255,255,.75);overflow:hidden}
+.footer-top{padding:70px 0 50px;border-bottom:1px solid rgba(255,255,255,.08)}
+.foot-brand{font-family:'Outfit',sans-serif;font-size:1.8rem;font-weight:900;letter-spacing:-1px;background:linear-gradient(135deg,var(--primary-light),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;margin-bottom:14px}
+.foot-desc{font-family:'Outfit',sans-serif;font-size:.82rem;line-height:1.8;color:rgba(255,255,255,.5);max-width:280px;margin-bottom:22px}
+.foot-social{display:flex;gap:10px}
+.foot-soc-btn{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6);text-decoration:none;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .22s}
+.foot-soc-btn:hover{background:var(--primary);border-color:var(--primary);color:#fff}
+.foot-heading{font-family:'Fira Code',monospace;font-size:.82rem;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.12em;margin-bottom:20px}
+.foot-links{list-style:none;padding:0;margin:0}
+.foot-links li{margin-bottom:10px}
+.foot-links a{font-family:'Outfit',sans-serif;font-size:.82rem;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .2s}
+.foot-links a i{color:var(--primary-light);font-size:.72rem;width:14px;text-align:center}
+.foot-links a:hover{color:var(--primary-light)}
+.foot-contact-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px}
+.fci-icon{width:34px;height:34px;border-radius:9px;flex-shrink:0;background:rgba(13,148,136,.18);display:flex;align-items:center;justify-content:center;color:var(--primary-light);font-size:.82rem}
+.fci-text{font-family:'Outfit',sans-serif;font-size:.79rem;color:rgba(255,255,255,.5);line-height:1.5}
+.footer-bottom{padding:20px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.foot-copy{font-family:'Outfit',sans-serif;font-size:.75rem;color:rgba(255,255,255,.35)}
+.foot-copy span{color:var(--primary-light)}
+.foot-made{font-family:'Fira Code',monospace;font-size:.75rem;color:rgba(255,255,255,.3);display:flex;align-items:center;gap:5px}
+.foot-back{font-family:'Fira Code',monospace;font-size:.75rem;color:rgba(255,255,255,.35);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}
+.foot-back:hover{color:var(--primary-light)}
+
+/* ══ SCROLL TOP ══ */
+#stt{position:fixed;bottom:26px;right:26px;z-index:500;width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;border:none;cursor:pointer;display:none;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 6px 20px var(--shadow2);transition:all .3s}
+#stt.show{display:flex}
+#stt:hover{transform:translateY(-3px);box-shadow:0 10px 28px var(--shadow2)}
+
+/* ══ REVEAL ══ */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:991px){.hero-img-wrap{margin-top:40px}.hero-img-ring{width:260px;height:260px}.fb1,.fb2,.fb3,.fb4{display:none}.edu-timeline::before{left:22px}.edu-dot{width:46px}}
+@media(max-width:576px){.hero-stats{flex-direction:column;width:100%}.stat-box{border-right:none;border-bottom:1px solid var(--border)}.stat-box:last-child{border-bottom:none}.hero-title{letter-spacing:-1.5px}.edu-item{flex-direction:column;gap:12px}.edu-dot{flex-direction:row;width:auto}.edu-timeline::before{display:none}}
+</style>
 </head>
 <body>
 
-<!-- PRELOADER -->
-<div id="preloader">
-  <div class="preloader-inner">
-    <div class="preloader-ring"></div>
-    <div class="preloader-text">LOADING</div>
-  </div>
-</div>
-
-<!-- NAVBAR -->
-<nav id="navbar">
+<!-- ════ NAVBAR — সব section ঠিকমতো আছে ════ -->
+<nav class="navbar navbar-expand-lg" id="navbar">
   <div class="container">
-    <div class="d-flex align-items-center justify-content-between w-100">
-      <a class="navbar-brand" href="#home">Abdul<span>.dev</span></a>
-      <button class="navbar-toggler d-lg-none" type="button" id="navToggler" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse d-lg-flex align-items-center justify-content-end gap-2" id="navMenu">
-        <a href="#home" class="nav-link active">Home</a>
-        <a href="#about" class="nav-link">About</a>
-        <a href="#skills" class="nav-link">Skills</a>
-        <a href="#projects" class="nav-link">Projects</a>
-        <a href="#contact" class="nav-link">Contact</a>
-        <button class="theme-toggle ms-2" id="themeToggle" aria-label="Toggle theme"><i class="fas fa-sun"></i></button>
-      </div>
+    <a class="nav-brand" href="#home">AM<span>.</span></a>
+    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <i class="fas fa-bars" style="color:var(--primary)"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+        <li class="nav-item"><a class="nav-link" href="#home"><i class="fas fa-house"></i> Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about"><i class="fas fa-user"></i> About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills"><i class="fas fa-code"></i> Skills</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#services" role="button" data-bs-toggle="dropdown">
+            <i class="fas fa-briefcase"></i> Services
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#services"><span class="di-icon"><i class="fas fa-laptop-code"></i></span>Web Development</a></li>
+            <li><a class="dropdown-item" href="#services"><span class="di-icon"><i class="fab fa-laravel"></i></span>Laravel Development</a></li>
+            <li><a class="dropdown-item" href="#services"><span class="di-icon"><i class="fas fa-database"></i></span>Database Design</a></li>
+            <li><hr class="dropdown-divider"/></li>
+            <li><a class="dropdown-item" href="#services"><span class="di-icon"><i class="fas fa-paint-brush"></i></span>UI/UX Design</a></li>
+            <li><a class="dropdown-item" href="#services"><span class="di-icon"><i class="fas fa-plug"></i></span>API Development</a></li>
+            <li><a class="dropdown-item" href="#services"><span class="di-icon"><i class="fas fa-screwdriver-wrench"></i></span>Website Maintenance</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#projects"><i class="fas fa-folder-open"></i> Projects</a></li>
+        <li class="nav-item ms-lg-2"><a class="nav-link btn-nav" href="#contact"><i class="fas fa-paper-plane"></i> Hire Me</a></li>
+      </ul>
     </div>
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ════ HOME ════ -->
 <section id="home">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="container">
+  <div class="container" style="position:relative;z-index:1">
     <div class="row align-items-center gy-5">
-      <div class="col-lg-6 hero-content">
-        <div class="hero-tag">Available for work</div>
-        <h1 class="hero-name">Hi, I'm <span class="highlight">Abdul<br>Mutaleb</span></h1>
-        <div class="hero-title">
-          <span class="typing-text" id="typingEl"></span><span class="cursor-blink"></span>
+      <div class="col-lg-7 reveal">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span class="badge-text"><i class="fas fa-circle-check me-1" style="color:var(--accent2)"></i>Available for freelance &amp; full-time</span>
         </div>
-        <p class="hero-desc">Passionate Full Stack Developer with strong problem-solving skills and experience building responsive, modern, and scalable web applications.</p>
-        <div class="hero-btns">
-          <a href="#projects" class="btn-primary-custom"><i class="fas fa-folder-open"></i> View Projects</a>
-          <a href="#contact" class="btn-outline-custom"><i class="fas fa-paper-plane"></i> Contact Me</a>
+        <h1 class="hero-title">Hi, I'm<br/><span class="name-color">Abdul Mutaleb</span></h1>
+        <p class="hero-role">
+          <span class="role-prefix">role =</span>
+          "<span id="typed">Full Stack Developer</span><span class="cursor-blink">|</span>"
+        </p>
+        <p class="hero-desc">I craft beautiful, high-performance web applications — from pixel-perfect frontends with HTML, CSS &amp; Bootstrap to rock-solid backends with PHP, Laravel &amp; MySQL.</p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn-primary-hero"><i class="fas fa-eye"></i> View My Work</a>
+          <a href="#contact" class="btn-secondary-hero"><i class="fas fa-paper-plane"></i> Contact Me</a>
         </div>
-        <div class="hero-socials">
-          <a href="#" class="social-icon" title="GitHub"><i class="fab fa-github"></i></a>
-          <a href="#" class="social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#" class="social-icon" title="Twitter"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <div class="hero-stats">
+          <div class="stat-box">
+            <span class="stat-icon"><i class="fas fa-calendar-check"></i></span>
+            <span class="stat-n" data-count="3">0</span>
+            <span class="stat-l">Years Exp.</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-icon"><i class="fas fa-diagram-project"></i></span>
+            <span class="stat-n" data-count="20">0</span>
+            <span class="stat-l">Projects</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-icon"><i class="fas fa-layer-group"></i></span>
+            <span class="stat-n" data-count="7">0</span>
+            <span class="stat-l">Technologies</span>
+          </div>
         </div>
       </div>
-      <div class="col-lg-6 hero-visual">
-        <div class="hero-avatar-wrap">
-          <div class="hero-avatar-ring"></div>
-          <img src="img/mypic.jpg" alt="Abdul Mutaleb" class="avatar-initials" style="object-fit:cover;">
-          <div class="hero-badge b1">
-            <div class="badge-label">Experience</div>
-            <div class="badge-value">3+ Years</div>
-          </div>
-          <div class="hero-badge b2">
-            <div class="badge-label">Projects</div>
-            <div class="badge-value">50+</div>
+
+      <!-- ════ HERO IMAGE — Static SVG Avatar (no upload) ════ -->
+      <div class="col-lg-5 reveal" style="transition-delay:.2s">
+        <div class="hero-img-wrap">
+          <div class="float-badge fb1"><i class="fab fa-laravel"></i>Laravel Expert</div>
+          <div class="float-badge fb2"><i class="fas fa-database"></i>MySQL</div>
+          <div class="float-badge fb3"><i class="fab fa-html5"></i>HTML &amp; CSS</div>
+          <div class="float-badge fb4"><i class="fab fa-js"></i>JavaScript</div>
+          <div class="hero-img-ring">
+            <div class="hero-img-inner">
+              <span class="avatar-name-badge">Abdul Mutaleb</span>
+              <svg viewBox="0 0 220 200" xmlns="http://www.w3.org/2000/svg" style="width:90%;height:90%">
+                <!-- shirt/body -->
+                <ellipse cx="110" cy="215" rx="80" ry="55" fill="#0d9488" opacity=".95"/>
+                <ellipse cx="110" cy="196" rx="60" ry="40" fill="#0f766e"/>
+                <!-- collar -->
+                <path d="M91 162 Q110 180 129 162 L124 150 Q110 166 96 150 Z" fill="#fff" opacity=".85"/>
+                <!-- neck -->
+                <rect x="98" y="132" width="24" height="32" rx="10" fill="#c8853a" opacity=".7"/>
+                <!-- head -->
+                <ellipse cx="110" cy="105" rx="44" ry="48" fill="#d4881e" opacity=".75"/>
+                <ellipse cx="110" cy="106" rx="40" ry="44" fill="#c8780f" opacity=".65"/>
+                <!-- hair -->
+                <ellipse cx="110" cy="65" rx="42" ry="24" fill="#1a1209"/>
+                <ellipse cx="110" cy="60" rx="40" ry="19" fill="#231810"/>
+                <ellipse cx="71"  cy="80" rx="11" ry="20" fill="#1a1209"/>
+                <ellipse cx="149" cy="80" rx="11" ry="20" fill="#1a1209"/>
+                <!-- ears -->
+                <ellipse cx="67"  cy="107" rx="8" ry="11" fill="#c8780f" opacity=".65"/>
+                <ellipse cx="153" cy="107" rx="8" ry="11" fill="#c8780f" opacity=".65"/>
+                <!-- eyes white -->
+                <ellipse cx="93"  cy="103" rx="7" ry="8"  fill="#fff"/>
+                <ellipse cx="127" cy="103" rx="7" ry="8"  fill="#fff"/>
+                <!-- pupils -->
+                <circle  cx="94"  cy="104" r="4.5" fill="#1a1209"/>
+                <circle  cx="128" cy="104" r="4.5" fill="#1a1209"/>
+                <!-- eye shine -->
+                <circle  cx="95.5" cy="102" r="1.8" fill="#fff"/>
+                <circle  cx="129.5" cy="102" r="1.8" fill="#fff"/>
+                <!-- eyebrows -->
+                <path d="M85 92 Q93 87 101 91"  stroke="#1a1209" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+                <path d="M119 91 Q127 87 135 92" stroke="#1a1209" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+                <!-- nose -->
+                <path d="M106 110 Q104 122 110 127 Q116 122 114 110" stroke="#a06010" stroke-width="1.6" fill="none" opacity=".55"/>
+                <!-- mouth -->
+                <path d="M99 133 Q110 142 121 133" stroke="#8b4513" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                <!-- beard hint -->
+                <ellipse cx="110" cy="138" rx="26" ry="10" fill="#8b4513" opacity=".18"/>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <a href="#about" class="scroll-cue">
-    <span>Scroll</span>
-    <i class="fas fa-chevron-down"></i>
-  </a>
 </section>
 
-<!-- ABOUT -->
+<!-- ════ SERVICES ════ -->
+<section id="services">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-7 reveal">
+        <div class="sec-label">what I offer</div>
+        <h2 class="sec-title">My <span>Services</span></h2>
+        <div class="divider"></div>
+        <p style="font-family:'Outfit',sans-serif;font-size:.9rem;color:var(--muted);line-height:1.8">End-to-end web development services — from designing beautiful interfaces to building powerful backend systems.</p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4 reveal" style="transition-delay:.05s">
+        <div class="srv-card">
+          <div class="srv-icon-wrap"><i class="fas fa-laptop-code"></i></div>
+          <div class="srv-title">Web Development</div>
+          <div class="srv-desc">Building modern, responsive websites that work perfectly on all devices and browsers.</div>
+          <ul class="srv-list">
+            <li><i class="fas fa-check-circle"></i>Responsive Design</li>
+            <li><i class="fas fa-check-circle"></i>Cross-Browser Support</li>
+            <li><i class="fas fa-check-circle"></i>Performance Optimization</li>
+            <li><i class="fas fa-check-circle"></i>Clean &amp; Maintainable Code</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal" style="transition-delay:.1s">
+        <div class="srv-card">
+          <div class="srv-icon-wrap"><i class="fab fa-laravel"></i></div>
+          <div class="srv-title">Laravel Development</div>
+          <div class="srv-desc">Full-featured web applications built with Laravel following MVC architecture and best practices.</div>
+          <ul class="srv-list">
+            <li><i class="fas fa-check-circle"></i>MVC Architecture</li>
+            <li><i class="fas fa-check-circle"></i>Auth &amp; Authorization</li>
+            <li><i class="fas fa-check-circle"></i>Admin Dashboards</li>
+            <li><i class="fas fa-check-circle"></i>E-Commerce Systems</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal" style="transition-delay:.15s">
+        <div class="srv-card">
+          <div class="srv-icon-wrap"><i class="fas fa-plug"></i></div>
+          <div class="srv-title">API Development</div>
+          <div class="srv-desc">Secure, scalable RESTful APIs for mobile apps, SPAs, and third-party integrations.</div>
+          <ul class="srv-list">
+            <li><i class="fas fa-check-circle"></i>RESTful API Design</li>
+            <li><i class="fas fa-check-circle"></i>JWT Authentication</li>
+            <li><i class="fas fa-check-circle"></i>API Documentation</li>
+            <li><i class="fas fa-check-circle"></i>Third-Party Integration</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal" style="transition-delay:.2s">
+        <div class="srv-card">
+          <div class="srv-icon-wrap"><i class="fas fa-database"></i></div>
+          <div class="srv-title">Database Design</div>
+          <div class="srv-desc">Efficient, normalized database schemas and optimized SQL queries for high-performance apps.</div>
+          <ul class="srv-list">
+            <li><i class="fas fa-check-circle"></i>MySQL Schema Design</li>
+            <li><i class="fas fa-check-circle"></i>Query Optimization</li>
+            <li><i class="fas fa-check-circle"></i>Database Migrations</li>
+            <li><i class="fas fa-check-circle"></i>Data Relationships</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal" style="transition-delay:.25s">
+        <div class="srv-card">
+          <div class="srv-icon-wrap"><i class="fas fa-paint-brush"></i></div>
+          <div class="srv-title">UI/UX Design</div>
+          <div class="srv-desc">Clean, intuitive interfaces using Bootstrap and modern CSS delivering great user experiences.</div>
+          <ul class="srv-list">
+            <li><i class="fas fa-check-circle"></i>Bootstrap UI Components</li>
+            <li><i class="fas fa-check-circle"></i>Responsive Layouts</li>
+            <li><i class="fas fa-check-circle"></i>CSS Animations</li>
+            <li><i class="fas fa-check-circle"></i>User-Friendly Design</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal" style="transition-delay:.3s">
+        <div class="srv-card">
+          <div class="srv-icon-wrap"><i class="fas fa-screwdriver-wrench"></i></div>
+          <div class="srv-title">Website Maintenance</div>
+          <div class="srv-desc">Keeping your websites updated, secure, and running at their best with regular maintenance.</div>
+          <ul class="srv-list">
+            <li><i class="fas fa-check-circle"></i>Bug Fixing</li>
+            <li><i class="fas fa-check-circle"></i>Security Updates</li>
+            <li><i class="fas fa-check-circle"></i>Feature Additions</li>
+            <li><i class="fas fa-check-circle"></i>Performance Tuning</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ ABOUT ════ -->
 <section id="about">
   <div class="container">
-    <div class="row align-items-center gy-5">
-      <div class="col-lg-5 reveal-left">
+    <div class="row g-5 align-items-start">
+      <div class="col-lg-4 reveal">
         <div class="about-img-wrap">
-          <img src="img/mypic.jpg" alt="Abdul Mutaleb" class="avatar-initials" style="object-fit:cover;">
-          <div class="about-badge-wrap">
-            <div class="about-badge-num">3+</div>
-            <div class="about-badge-text">Years Exp</div>
+          <div class="about-img-top">
+            <!-- About SVG Avatar -->
+            <div class="about-avatar">
+              <svg viewBox="0 0 220 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                <ellipse cx="110" cy="215" rx="80" ry="55" fill="#0d9488" opacity=".9"/>
+                <ellipse cx="110" cy="196" rx="60" ry="40" fill="#0f766e"/>
+                <path d="M91 162 Q110 180 129 162 L124 150 Q110 166 96 150 Z" fill="#fff" opacity=".85"/>
+                <rect x="98" y="132" width="24" height="32" rx="10" fill="#c8853a" opacity=".7"/>
+                <ellipse cx="110" cy="106" rx="40" ry="44" fill="#c8780f" opacity=".65"/>
+                <ellipse cx="110" cy="65" rx="42" ry="24" fill="#1a1209"/>
+                <ellipse cx="71" cy="80" rx="11" ry="20" fill="#1a1209"/>
+                <ellipse cx="149" cy="80" rx="11" ry="20" fill="#1a1209"/>
+                <ellipse cx="93"  cy="103" rx="7" ry="8" fill="#fff"/>
+                <ellipse cx="127" cy="103" rx="7" ry="8" fill="#fff"/>
+                <circle  cx="94"  cy="104" r="4.5" fill="#1a1209"/>
+                <circle  cx="128" cy="104" r="4.5" fill="#1a1209"/>
+                <circle  cx="95.5" cy="102" r="1.8" fill="#fff"/>
+                <circle  cx="129.5" cy="102" r="1.8" fill="#fff"/>
+                <path d="M85 92 Q93 87 101 91"  stroke="#1a1209" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+                <path d="M119 91 Q127 87 135 92" stroke="#1a1209" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+                <path d="M99 133 Q110 142 121 133" stroke="#8b4513" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="about-name">Abdul Mutaleb</div>
+            <div class="about-role-lbl">// Full Stack Web Developer</div>
           </div>
+          <ul class="list-unstyled mb-0">
+            <li class="about-info-item"><span class="aii-key"><i class="fas fa-map-marker-alt"></i>location</span><span class="aii-val">Anwara, Chittagong</span></li>
+            <li class="about-info-item"><span class="aii-key"><i class="fas fa-envelope"></i>email</span><span class="aii-val">abdulmutaleb.puc@gmail.com</span></li>
+            <li class="about-info-item"><span class="aii-key"><i class="fas fa-phone"></i>phone</span><span class="aii-val">+880-1319245857</span></li>
+            <li class="about-info-item"><span class="aii-key"><i class="fas fa-graduation-cap"></i>edu</span><span class="aii-val">BSc. CSE</span></li>
+            <li class="about-info-item"><span class="aii-key"><i class="fas fa-circle-check" style="color:var(--accent2)"></i>status</span><span class="aii-val" style="color:var(--accent2)">Available</span></li>
+          </ul>
         </div>
       </div>
-      <div class="col-lg-7 about-text reveal-right">
-        <div class="section-label">About Me</div>
-        <h2 class="section-title">Full Stack Developer<br>Based in <span>Bangladesh</span></h2>
-        <div class="title-line"></div>
-        <p>I'm a passionate Full Stack Web Developer with extensive experience in building modern, responsive, and scalable web applications. My expertise spans both frontend and backend technologies, allowing me to deliver complete end-to-end solutions.</p>
-        <p>With a strong foundation in PHP and Laravel on the backend, paired with proficiency in JavaScript, HTML5, and CSS3 on the frontend, I craft experiences that are not only functional but delightful to use. I'm dedicated to clean code, best practices, and continuous learning.</p>
-        <p>When I'm not coding, I'm exploring new technologies, contributing to open-source projects, and sharpening my problem-solving skills through coding challenges.</p>
-        <div class="counter-grid">
-          <div class="counter-item">
-            <div class="counter-num" data-target="50">0</div>
-            <div class="counter-label">Projects Done</div>
-          </div>
-          <div class="counter-item">
-            <div class="counter-num" data-target="30">0</div>
-            <div class="counter-label">Happy Clients</div>
-          </div>
-          <div class="counter-item">
-            <div class="counter-num" data-target="3">0</div>
-            <div class="counter-label">Years Exp</div>
-          </div>
+      <div class="col-lg-8 reveal" style="transition-delay:.15s">
+        <div class="sec-label">about me</div>
+        <h2 class="sec-title">Hi, I'm <span>Abdul Mutaleb</span></h2>
+        <div class="divider"></div>
+        <p>I'm a passionate Full Stack Web Developer with strong expertise in both frontend and backend technologies. I love turning complex problems into clean, elegant web solutions that make a real impact.</p>
+        <p>My journey covers the full stack — from crafting beautiful user interfaces with HTML5, CSS3, and Bootstrap, to building powerful server-side applications with PHP &amp; Laravel, and managing data with MySQL.</p>
+        <div class="about-highlight">
+          <i class="fas fa-lightbulb"></i>
+          I specialize in building complete web solutions — from designing clean user interfaces to architecting RESTful APIs and robust database schemas using Laravel &amp; MySQL.
         </div>
-        <a href="#" class="btn-cv"><i class="fas fa-download"></i> Download CV</a>
+        <a href="#contact" class="btn-primary-hero mt-2"><i class="fas fa-download"></i> Download CV</a>
       </div>
     </div>
   </div>
 </section>
-
-<div class="divider"></div>
-
-<!-- SKILLS -->
+<!-- ════ SKILLS ════ -->
 <section id="skills">
   <div class="container">
     <div class="row mb-5">
-      <div class="col-lg-6 reveal">
-        <div class="section-label">My Skills</div>
-        <h2 class="section-title">Technical <span>Expertise</span></h2>
-        <div class="title-line"></div>
-        <p class="section-desc">I've worked with a range of technologies in web development. Here's a snapshot of my core technical skills.</p>
+      <div class="col-lg-7 reveal">
+        <div class="sec-label">tech stack</div>
+        <h2 class="sec-title">Skills &amp; <span>Technologies</span></h2>
+        <div class="divider"></div>
+        <p style="font-family:'Outfit',sans-serif;font-size:.88rem;color:var(--muted);line-height:1.8">A complete skill set to build anything on the web — from stunning UIs to powerful backends.</p>
       </div>
     </div>
-    <div class="row g-4">
-      <div class="col-md-6 col-lg-4 reveal delay-1">
-        <div class="skill-card">
-          <div class="skill-header">
-            <div class="skill-name"><span class="skill-icon">🌐</span> HTML5</div>
-            <div class="skill-pct">95%</div>
-          </div>
-          <div class="skill-bar-wrap"><div class="skill-bar" data-width="95"></div></div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4 reveal delay-2">
-        <div class="skill-card">
-          <div class="skill-header">
-            <div class="skill-name"><span class="skill-icon">🎨</span> CSS3</div>
-            <div class="skill-pct">90%</div>
-          </div>
-          <div class="skill-bar-wrap"><div class="skill-bar" data-width="90"></div></div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4 reveal delay-3">
-        <div class="skill-card">
-          <div class="skill-header">
-            <div class="skill-name"><span class="skill-icon">⚡</span> Bootstrap 5</div>
-            <div class="skill-pct">90%</div>
-          </div>
-          <div class="skill-bar-wrap"><div class="skill-bar" data-width="90"></div></div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4 reveal delay-1">
-        <div class="skill-card">
-          <div class="skill-header">
-            <div class="skill-name"><span class="skill-icon">✨</span> JavaScript</div>
-            <div class="skill-pct">85%</div>
-          </div>
-          <div class="skill-bar-wrap"><div class="skill-bar" data-width="85"></div></div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4 reveal delay-2">
-        <div class="skill-card">
-          <div class="skill-header">
-            <div class="skill-name"><span class="skill-icon">🐘</span> PHP</div>
-            <div class="skill-pct">85%</div>
-          </div>
-          <div class="skill-bar-wrap"><div class="skill-bar" data-width="85"></div></div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4 reveal delay-3">
-        <div class="skill-card">
-          <div class="skill-header">
-            <div class="skill-name"><span class="skill-icon">🔴</span> Laravel</div>
-            <div class="skill-pct">80%</div>
-          </div>
-          <div class="skill-bar-wrap"><div class="skill-bar" data-width="80"></div></div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4 reveal delay-4">
-        <div class="skill-card">
-          <div class="skill-header">
-            <div class="skill-name"><span class="skill-icon">🗄️</span> MySQL</div>
-            <div class="skill-pct">80%</div>
-          </div>
-          <div class="skill-bar-wrap"><div class="skill-bar" data-width="80"></div></div>
-        </div>
-      </div>
-    </div>
+    <div class="row g-4" id="skills-grid"></div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- PROJECTS -->
+<!-- ════ PROJECTS ════ -->
 <section id="projects">
   <div class="container">
     <div class="row mb-4">
-      <div class="col-lg-7 reveal">
-        <div class="section-label">My Work</div>
-        <h2 class="section-title">Recent <span>Projects</span></h2>
-        <div class="title-line"></div>
-        <p class="section-desc">A showcase of projects I've designed and developed — from full-stack web apps to responsive frontend interfaces.</p>
+      <div class="col-12 reveal">
+        <div class="sec-label">my work</div>
+        <h2 class="sec-title">Featured <span>Projects</span></h2>
+        <div class="divider"></div>
       </div>
     </div>
-    <div class="project-filter reveal">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="laravel">Laravel</button>
-      <button class="filter-btn" data-filter="js">JavaScript</button>
-      <button class="filter-btn" data-filter="php">PHP</button>
-      <button class="filter-btn" data-filter="frontend">Frontend</button>
-    </div>
-    <div class="row g-4" id="projectsGrid">
-      <div class="col-md-6 col-lg-4 reveal delay-1 project-item" data-category="laravel php">
-        <div class="project-card">
-          <div class="project-img-wrap">
-            <div class="project-placeholder">🛒</div>
-            <div class="project-overlay">
-              <a href="#" class="overlay-btn" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
-              <a href="#" class="overlay-btn" title="GitHub"><i class="fab fa-github"></i></a>
-            </div>
-            <span class="project-num">01</span>
-          </div>
-          <div class="project-body">
-            <div class="project-title">E-Commerce Platform</div>
-            <p class="project-desc">Full-featured online store with product management, cart system, order tracking, and admin dashboard.</p>
-            <div class="project-tags">
-              <span class="tag">Laravel</span><span class="tag">MySQL</span><span class="tag">Bootstrap</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="plink demo"><i class="fas fa-eye"></i> Preview</a>
-              <a href="#" class="plink github"><i class="fab fa-github"></i> Code</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4 reveal delay-2 project-item" data-category="laravel php">
-        <div class="project-card">
-          <div class="project-img-wrap">
-            <div class="project-placeholder">📋</div>
-            <div class="project-overlay">
-              <a href="#" class="overlay-btn"><i class="fas fa-external-link-alt"></i></a>
-              <a href="#" class="overlay-btn"><i class="fab fa-github"></i></a>
-            </div>
-            <span class="project-num">02</span>
-          </div>
-          <div class="project-body">
-            <div class="project-title">Task Management App</div>
-            <p class="project-desc">Kanban-style project management tool with real-time updates, team collaboration, and deadline tracking.</p>
-            <div class="project-tags">
-              <span class="tag">Laravel</span><span class="tag">JS</span><span class="tag">MySQL</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="plink demo"><i class="fas fa-eye"></i> Preview</a>
-              <a href="#" class="plink github"><i class="fab fa-github"></i> Code</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4 reveal delay-3 project-item" data-category="js frontend">
-        <div class="project-card">
-          <div class="project-img-wrap">
-            <div class="project-placeholder">💰</div>
-            <div class="project-overlay">
-              <a href="#" class="overlay-btn"><i class="fas fa-external-link-alt"></i></a>
-              <a href="#" class="overlay-btn"><i class="fab fa-github"></i></a>
-            </div>
-            <span class="project-num">03</span>
-          </div>
-          <div class="project-body">
-            <div class="project-title">Finance Dashboard</div>
-            <p class="project-desc">Interactive financial analytics dashboard with charts, expense tracking, and budget planning tools.</p>
-            <div class="project-tags">
-              <span class="tag">JavaScript</span><span class="tag">CSS3</span><span class="tag">Bootstrap</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="plink demo"><i class="fas fa-eye"></i> Preview</a>
-              <a href="#" class="plink github"><i class="fab fa-github"></i> Code</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4 reveal delay-1 project-item" data-category="php">
-        <div class="project-card">
-          <div class="project-img-wrap">
-            <div class="project-placeholder">🏥</div>
-            <div class="project-overlay">
-              <a href="#" class="overlay-btn"><i class="fas fa-external-link-alt"></i></a>
-              <a href="#" class="overlay-btn"><i class="fab fa-github"></i></a>
-            </div>
-            <span class="project-num">04</span>
-          </div>
-          <div class="project-body">
-            <div class="project-title">Hospital Management</div>
-            <p class="project-desc">Comprehensive HMS with patient records, appointment scheduling, billing, and doctor management.</p>
-            <div class="project-tags">
-              <span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">Bootstrap</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="plink demo"><i class="fas fa-eye"></i> Preview</a>
-              <a href="#" class="plink github"><i class="fab fa-github"></i> Code</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4 reveal delay-2 project-item" data-category="frontend js">
-        <div class="project-card">
-          <div class="project-img-wrap">
-            <div class="project-placeholder">🌤️</div>
-            <div class="project-overlay">
-              <a href="#" class="overlay-btn"><i class="fas fa-external-link-alt"></i></a>
-              <a href="#" class="overlay-btn"><i class="fab fa-github"></i></a>
-            </div>
-            <span class="project-num">05</span>
-          </div>
-          <div class="project-body">
-            <div class="project-title">Weather App</div>
-            <p class="project-desc">Real-time weather application with geolocation, 7-day forecast, and beautiful animated weather icons.</p>
-            <div class="project-tags">
-              <span class="tag">JavaScript</span><span class="tag">API</span><span class="tag">CSS3</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="plink demo"><i class="fas fa-eye"></i> Preview</a>
-              <a href="#" class="plink github"><i class="fab fa-github"></i> Code</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4 reveal delay-3 project-item" data-category="laravel php">
-        <div class="project-card">
-          <div class="project-img-wrap">
-            <div class="project-placeholder">📰</div>
-            <div class="project-overlay">
-              <a href="#" class="overlay-btn"><i class="fas fa-external-link-alt"></i></a>
-              <a href="#" class="overlay-btn"><i class="fab fa-github"></i></a>
-            </div>
-            <span class="project-num">06</span>
-          </div>
-          <div class="project-body">
-            <div class="project-title">Blog CMS Platform</div>
-            <p class="project-desc">Feature-rich content management system with WYSIWYG editor, SEO tools, tags, and user roles.</p>
-            <div class="project-tags">
-              <span class="tag">Laravel</span><span class="tag">PHP</span><span class="tag">MySQL</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="plink demo"><i class="fas fa-eye"></i> Preview</a>
-              <a href="#" class="plink github"><i class="fab fa-github"></i> Code</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="filter-row reveal" id="filters"></div>
+    <div class="row g-4" id="proj-grid"></div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- CONTACT -->
+<!-- ════ CONTACT ════ -->
 <section id="contact">
   <div class="container">
-    <div class="row mb-5">
-      <div class="col-lg-6 reveal">
-        <div class="section-label">Get In Touch</div>
-        <h2 class="section-title">Let's Work <span>Together</span></h2>
-        <div class="title-line"></div>
-        <p class="section-desc">Have a project in mind? I'd love to hear about it. Drop me a message and I'll get back to you as soon as possible.</p>
-      </div>
+    <div class="text-center mb-5 reveal">
+      <div class="sec-label justify-content-center">get in touch</div>
+      <h2 class="sec-title">Let's Work <span>Together</span></h2>
+      <div class="divider mx-auto"></div>
     </div>
-    <div class="row g-5">
-      <div class="col-lg-5 reveal-left">
-        <div class="contact-info">
-          <div class="contact-item">
-            <div class="contact-icon-wrap"><i class="fas fa-map-marker-alt"></i></div>
-            <div>
-              <div class="contact-item-label">Location</div>
-              <div class="contact-item-value">Bangladesh</div>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon-wrap"><i class="fas fa-envelope"></i></div>
-            <div>
-              <div class="contact-item-label">Email</div>
-              <div class="contact-item-value">hello@abdulmutaleb.dev</div>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon-wrap"><i class="fas fa-phone"></i></div>
-            <div>
-              <div class="contact-item-label">Phone</div>
-              <div class="contact-item-value">+880 1XXX-XXXXXX</div>
-            </div>
-          </div>
-          <div class="mt-4">
-            <div class="footer-heading">Follow Me</div>
-            <div class="hero-socials">
-              <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
-              <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-              <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-              <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-            </div>
+    <div class="row g-4">
+      <div class="col-lg-7 reveal">
+        <div class="contact-card">
+          <div class="contact-body">
+            <h5 style="font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:800;color:var(--text);margin-bottom:22px;display:flex;align-items:center;gap:8px">
+              <i class="fas fa-envelope-open-text" style="color:var(--primary)"></i> Send Me a Message
+            </h5>
+            <form id="cform">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="cf-label"><i class="fas fa-user"></i>Full Name</label>
+                  <input class="cf-input" type="text" placeholder="John Doe" required/>
+                </div>
+                <div class="col-md-6">
+                  <label class="cf-label"><i class="fas fa-envelope"></i>Email Address</label>
+                  <input class="cf-input" type="email" placeholder="john@email.com" required/>
+                </div>
+                <div class="col-12">
+                  <label class="cf-label"><i class="fas fa-tag"></i>Subject</label>
+                  <input class="cf-input" type="text" placeholder="Project Inquiry" required/>
+                </div>
+                <div class="col-12">
+                  <label class="cf-label"><i class="fas fa-comment-dots"></i>Your Message</label>
+                  <textarea class="cf-textarea" rows="5" placeholder="Tell me about your project..." required></textarea>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn-send"><i class="fas fa-paper-plane"></i> Send Message</button>
+                  <div class="success-box" id="succ"><i class="fas fa-circle-check"></i> Message sent! I'll reply within 24 hours.</div>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-      <div class="col-lg-7 reveal-right">
-        <div class="contact-form">
-          <div class="row g-3">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="form-label">Your Name</label>
-                <input type="text" class="form-control-custom" id="contactName" placeholder="Abdul Mutaleb">
-                <div class="error-msg" id="nameError">Please enter your name.</div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="form-label">Email Address</label>
-                <input type="email" class="form-control-custom" id="contactEmail" placeholder="hello@example.com">
-                <div class="error-msg" id="emailError">Please enter a valid email.</div>
-              </div>
-            </div>
-            <div class="col-12">
-              <div class="form-group">
-                <label class="form-label">Subject</label>
-                <input type="text" class="form-control-custom" id="contactSubject" placeholder="Project Inquiry">
-                <div class="error-msg" id="subjectError">Please enter a subject.</div>
-              </div>
-            </div>
-            <div class="col-12">
-              <div class="form-group">
-                <label class="form-label">Message</label>
-                <textarea class="form-control-custom" id="contactMessage" rows="5" placeholder="Tell me about your project..."></textarea>
-                <div class="error-msg" id="messageError">Please enter your message.</div>
-              </div>
-            </div>
-            <div class="col-12">
-              <button class="btn-send" id="sendBtn"><i class="fas fa-paper-plane"></i> Send Message</button>
-              <div class="form-success" id="formSuccess">
-                <i class="fas fa-check-circle me-2"></i> Message sent! I'll get back to you soon.
-              </div>
+      <div class="col-lg-5 reveal" style="transition-delay:.15s">
+        <div class="contact-card h-100">
+          <div class="contact-body">
+            <h5 style="font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:800;color:var(--text);margin-bottom:22px;display:flex;align-items:center;gap:8px">
+              <i class="fas fa-address-card" style="color:var(--primary)"></i> Contact Information
+            </h5>
+            <div class="cinfo-row"><div class="ci-icon"><i class="fas fa-envelope"></i></div><div><div class="ci-lbl">// email</div><div class="ci-val">abdulmutaleb.puc@gmail.com</div></div></div>
+            <div class="cinfo-row"><div class="ci-icon"><i class="fas fa-phone"></i></div><div><div class="ci-lbl">// phone</div><div class="ci-val">+880-1319245857</div></div></div>
+            <div class="cinfo-row"><div class="ci-icon"><i class="fas fa-location-dot"></i></div><div><div class="ci-lbl">// location</div><div class="ci-val">Anwara, Chittagong, BD</div></div></div>
+            <div class="cinfo-row"><div class="ci-icon"><i class="fas fa-clock"></i></div><div><div class="ci-lbl">// response_time</div><div class="ci-val">Within 24 hours</div></div></div>
+            <div class="social-row">
+              <a href="https://github.com/Abdul-Mutaleb" target="_blank" class="soc-btn"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://linkedin.com/in/abdul-mutaleb" target="_blank" class="soc-btn"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
             </div>
           </div>
         </div>
@@ -461,60 +615,188 @@
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ════ FOOTER ════ -->
 <footer>
   <div class="container">
-    <div class="row g-4">
-      <div class="col-lg-4">
-        <a href="#home" class="footer-brand">Abdul<span>.dev</span></a>
-        <p class="footer-desc">Full Stack Developer specializing in modern web applications. Building digital experiences that make a difference.</p>
-        <div class="footer-socials">
-          <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
-          <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+    <div class="footer-top">
+      <div class="row g-5">
+        <div class="col-lg-4 col-md-6">
+          <div class="foot-brand">AM.</div>
+          <p class="foot-desc">Full Stack Web Developer specializing in Laravel, PHP, and modern frontend technologies. Building digital solutions that make a difference.</p>
+          <div class="foot-social">
+            <a href="https://github.com/Abdul-Mutaleb" target="_blank" class="foot-soc-btn" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/abdul-mutaleb" target="_blank" class="foot-soc-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          </div>
         </div>
-      </div>
-      <div class="col-6 col-lg-2 offset-lg-2">
-        <div class="footer-heading">Navigation</div>
-        <ul class="footer-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-      <div class="col-6 col-lg-2">
-        <div class="footer-heading">Services</div>
-        <ul class="footer-links">
-          <li><a href="#">Web Design</a></li>
-          <li><a href="#">Backend Dev</a></li>
-          <li><a href="#">API Building</a></li>
-          <li><a href="#">Consulting</a></li>
-        </ul>
-      </div>
-      <div class="col-lg-2">
-        <div class="footer-heading">Skills</div>
-        <ul class="footer-links">
-          <li><a href="#">Laravel</a></li>
-          <li><a href="#">JavaScript</a></li>
-          <li><a href="#">Bootstrap</a></li>
-          <li><a href="#">MySQL</a></li>
-        </ul>
+        <div class="col-lg-2 col-md-6 col-6">
+          <div class="foot-heading">Quick Links</div>
+          <ul class="foot-links">
+            <li><a href="#home"><i class="fas fa-house"></i>Home</a></li>
+            <li><a href="#about"><i class="fas fa-user"></i>About</a></li>
+            <li><a href="#education"><i class="fas fa-graduation-cap"></i>Education</a></li>
+            <li><a href="#skills"><i class="fas fa-code"></i>Skills</a></li>
+            <li><a href="#projects"><i class="fas fa-folder-open"></i>Projects</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i>Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 col-6">
+          <div class="foot-heading">Services</div>
+          <ul class="foot-links">
+            <li><a href="#services"><i class="fas fa-laptop-code"></i>Web Development</a></li>
+            <li><a href="#services"><i class="fab fa-laravel"></i>Laravel Dev</a></li>
+            <li><a href="#services"><i class="fas fa-plug"></i>API Development</a></li>
+            <li><a href="#services"><i class="fas fa-database"></i>Database Design</a></li>
+            <li><a href="#services"><i class="fas fa-paint-brush"></i>UI/UX Design</a></li>
+            <li><a href="#services"><i class="fas fa-screwdriver-wrench"></i>Maintenance</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="foot-heading">Get In Touch</div>
+          <div class="foot-contact-item"><div class="fci-icon"><i class="fas fa-envelope"></i></div><div class="fci-text">abdulmutaleb.puc@gmail.com</div></div>
+          <div class="foot-contact-item"><div class="fci-icon"><i class="fas fa-phone"></i></div><div class="fci-text">+880-1319245857</div></div>
+          <div class="foot-contact-item"><div class="fci-icon"><i class="fas fa-location-dot"></i></div><div class="fci-text">Anwara, Chittagong, Bangladesh</div></div>
+          <div class="foot-contact-item"><div class="fci-icon"><i class="fas fa-clock"></i></div><div class="fci-text">Mon – Sat: 9:00 AM – 6:00 PM</div></div>
+        </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2025 <span>Abdul Mutaleb</span>. All rights reserved.</div>
-      <div class="footer-copy">Made with <span>❤</span> in Bangladesh</div>
+      <p class="foot-copy">© 2025 <span>Abdul Mutaleb</span>. All rights reserved.</p>
+      <p class="foot-made"><i class="fas fa-heart" style="color:var(--primary-light)"></i> Made with Outfit &amp; Fira Code</p>
+      <a href="#home" class="foot-back"><i class="fas fa-arrow-up"></i> Back to Top</a>
     </div>
   </div>
 </footer>
 
-<!-- BACK TO TOP -->
-<button id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+<button id="stt" title="Back to top"><i class="fas fa-arrow-up"></i></button>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+<script>
+const SKILLS = [
+  {icon:'fa-brands fa-html5',    name:'HTML5',      cat:'// frontend',          pct:95, c1:'#e34f26', c2:'#ff6b35'},
+  {icon:'fa-brands fa-css3-alt', name:'CSS3',       cat:'// frontend',          pct:90, c1:'#264de4', c2:'#3b82f6'},
+  {icon:'fa-brands fa-bootstrap',name:'Bootstrap',  cat:'// ui_framework',      pct:92, c1:'#7952b3', c2:'#9c6bdb'},
+  {icon:'fa-brands fa-js',       name:'JavaScript', cat:'// scripting',         pct:80, c1:'#f7df1e', c2:'#f59e0b'},
+  {icon:'fa-brands fa-php',      name:'PHP',        cat:'// backend',           pct:82, c1:'#777bb4', c2:'#8b5cf6'},
+  {icon:'fa-brands fa-laravel',  name:'Laravel',    cat:'// backend_framework', pct:78, c1:'#ff2d20', c2:'#ef4444'},
+  {icon:'fa-solid fa-database',  name:'MySQL',      cat:'// database',          pct:80, c1:'#4479a1', c2:'#0891b2'},
+];
+
+const PROJECTS = [
+  {icon:'fa-solid fa-traffic-light', bg:'linear-gradient(135deg,#0d9488,#059669)', cat:'Laravel',  catIcon:'fa-brands fa-laravel', title:'Traffic Offense Management System', desc:'Role-based violation management for police departments — offense recording, fine management, vehicle verification, and admin dashboard.', tags:['Laravel','PHP','MySQL','Bootstrap','JavaScript']},
+  {icon:'fa-solid fa-gavel',         bg:'linear-gradient(135deg,#059669,#14b8a6)', cat:'Laravel',  catIcon:'fa-brands fa-laravel', title:'Online Bidding System',              desc:'Full-stack auction platform with bidding history, item approval workflow, user authorization, and admin management panel.',          tags:['Laravel','PHP','MySQL','Bootstrap','JavaScript']},
+  {icon:'fa-solid fa-chart-line',    bg:'linear-gradient(135deg,#0f766e,#10b981)', cat:'Laravel',  catIcon:'fa-brands fa-laravel', title:'Admin Dashboard',                    desc:'Real-time analytics panel with charts, user roles, CRUD operations and permission management.',                                        tags:['Laravel','JavaScript','MySQL','Bootstrap']},
+  {icon:'fa-solid fa-plug',          bg:'linear-gradient(135deg,#14b8a6,#059669)', cat:'PHP',      catIcon:'fa-brands fa-php',     title:'RESTful API',                        desc:'Secure REST API with JWT authentication, rate limiting, CRUD endpoints and full documentation.',                                      tags:['PHP','Laravel','MySQL','JSON']},
+  {icon:'fa-solid fa-newspaper',     bg:'linear-gradient(135deg,#5eead4,#0d9488)', cat:'PHP',      catIcon:'fa-brands fa-php',     title:'Blog &amp; CMS',                     desc:'Content management system with rich text editor, SEO tools, categories, tags and comment system.',                                   tags:['PHP','MySQL','CSS','JavaScript']},
+  {icon:'fa-solid fa-briefcase',     bg:'linear-gradient(135deg,#0d9488,#5eead4)', cat:'Frontend', catIcon:'fa-solid fa-code',     title:'Portfolio Website',                  desc:'Responsive animated portfolio with scroll effects, typed animation, and dynamic project loading.',                                    tags:['HTML','CSS','Bootstrap','JavaScript']},
+];
+
+// ── Skills render ──
+const sg = document.getElementById('skills-grid');
+SKILLS.forEach((s, i) => {
+  sg.innerHTML += `
+  <div class="col-sm-6 col-lg-3 reveal" style="transition-delay:${i*.07}s">
+    <div class="skill-card" data-pct="${s.pct}">
+      <div class="sk-icon-wrap" style="background:linear-gradient(135deg,${s.c1},${s.c2})"><i class="${s.icon}"></i></div>
+      <span class="sk-pct">${s.pct}%</span>
+      <div class="sk-name">${s.name}</div>
+      <div class="sk-cat">${s.cat}</div>
+      <div class="sk-bar"><div class="sk-fill" style="background:linear-gradient(90deg,${s.c1},${s.c2})"></div></div>
+    </div>
+  </div>`;
+});
+
+// ── Projects render ──
+const cats = ['All', ...new Set(PROJECTS.map(p => p.cat))];
+const catIcons = {All:'fa-solid fa-border-all', Laravel:'fa-brands fa-laravel', PHP:'fa-brands fa-php', Frontend:'fa-solid fa-code'};
+const fEl = document.getElementById('filters');
+cats.forEach((c, i) => {
+  const b = document.createElement('button');
+  b.className = 'filter-btn'+(i===0?' active':'');
+  b.innerHTML = `<i class="${catIcons[c]||'fa-solid fa-code'}"></i> ${c}`;
+  b.dataset.c = c;
+  fEl.appendChild(b);
+});
+function renderProj(f='All') {
+  const g = document.getElementById('proj-grid');
+  const list = f==='All' ? PROJECTS : PROJECTS.filter(p=>p.cat===f);
+  g.innerHTML = list.map((p,i) => `
+  <div class="col-md-6 col-lg-4 reveal" style="transition-delay:${i*.08}s">
+    <div class="proj-card">
+      <div class="proj-thumb" style="background:${p.bg}">
+        <div class="proj-thumb-icon"><i class="${p.icon}"></i></div>
+        <div class="proj-overlay">
+          <a href="#" class="ov-btn" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+          <a href="https://github.com/Abdul-Mutaleb" target="_blank" class="ov-btn" title="Source Code"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-cat-tag"><i class="${p.catIcon}"></i> ${p.cat}</div>
+        <div class="proj-name">${p.title}</div>
+        <div class="proj-desc">${p.desc}</div>
+        <div class="proj-tags">${p.tags.map(t=>`<span class="ptag">${t}</span>`).join('')}</div>
+      </div>
+    </div>
+  </div>`).join('');
+  setTimeout(initReveal, 50);
+}
+renderProj();
+fEl.addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if(!btn) return;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderProj(btn.dataset.c);
+});
+
+// ── Typed text ──
+const phrases=['Full Stack Developer','PHP Backend Engineer','Laravel Expert','Web App Builder','MySQL Specialist'];
+let pi=0,ci=0,del=false;
+const tEl=document.getElementById('typed');
+function type(){const cur=phrases[pi];tEl.textContent=del?cur.slice(0,ci--):cur.slice(0,ci++);let t=del?60:105;if(!del&&ci===cur.length+1){del=true;t=1700}else if(del&&ci<0){del=false;pi=(pi+1)%phrases.length;t=300}setTimeout(type,t)}
+type();
+
+// ── Counter animation ──
+function animCount(el){if(el.dataset.counted)return;el.dataset.counted=true;const tgt=+el.dataset.count;let n=0;const iv=setInterval(()=>{n+=tgt/50;if(n>=tgt){el.textContent=tgt+'+';clearInterval(iv)}else el.textContent=Math.floor(n)},28)}
+
+// ── Scroll reveal ──
+function initReveal(){
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');const f=e.target.querySelector('.sk-fill');if(f)f.style.width=e.target.dataset.pct+'%';e.target.querySelectorAll('[data-count]').forEach(animCount)}})},{threshold:.13});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+}
+initReveal();
+
+// ── Smooth scroll ──
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',function(e){
+    const t=document.querySelector(this.getAttribute('href'));
+    if(!t)return;e.preventDefault();
+    window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-78,behavior:'smooth'});
+    const nav=document.getElementById('navMenu');
+    if(nav.classList.contains('show'))bootstrap.Collapse.getInstance(nav)?.hide();
+  });
+});
+
+// ── Navbar scroll + active link ──
+const sections=document.querySelectorAll('section[id]');
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',scrollY>60);
+  document.getElementById('stt').classList.toggle('show',scrollY>400);
+  let cur='';sections.forEach(s=>{if(scrollY>=s.offsetTop-100)cur=s.id});
+  document.querySelectorAll('.navbar-nav .nav-link').forEach(l=>{
+    l.classList.remove('active-link');
+    if(l.getAttribute('href')==='#'+cur)l.classList.add('active-link');
+  });
+});
+document.getElementById('stt').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+// ── Contact form ──
+document.getElementById('cform').addEventListener('submit',function(e){
+  e.preventDefault();
+  const s=document.getElementById('succ');
+  s.style.display='flex';
+  this.reset();
+  setTimeout(()=>s.style.display='none',5000);
+});
+</script>
 </body>
 </html>
