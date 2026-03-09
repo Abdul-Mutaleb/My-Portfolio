@@ -3,6 +3,7 @@
    Scroll popup + Infinite slider + Web3Forms
    ════════════════════════════════════════════════ */
 
+<<<<<<< HEAD
 const WEB3_KEY = '3837ebc6-0387-4278-8f13-0906af2d0232';
 const TO_EMAIL  = 'abdulmutaleb.puc@gmail.com';
 const CV_PATH   = 'cv/Abdul-Mutaleb-CV.pdf';
@@ -312,3 +313,5 @@ document.getElementById('cform').addEventListener('submit', async function(e) {
     btnSpin.style.display = 'none';
   }
 });
+=======
+>>>>>>> 6b542674dd66e7f36ca020239a49a2a45a55f1b0
