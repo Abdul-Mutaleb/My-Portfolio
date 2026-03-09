@@ -12,7 +12,82 @@
 html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
 section{scroll-margin-top:80px}
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+}
 
+.container, .container-fluid {
+  overflow-x: hidden;
+}
+
+@media (max-width: 991px) {
+  #home {
+    overflow: hidden;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  #home::before,
+  #home::after {
+    display: none;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 8vw, 3rem) !important;
+    letter-spacing: -1px !important;
+  }
+
+  .hero-role {
+    font-size: .82rem !important;
+    flex-wrap: wrap;
+  }
+
+  .hero-desc {
+    font-size: .88rem !important;
+    max-width: 100% !important;
+  }
+
+  .hero-cta {
+    flex-wrap: wrap;
+  }
+
+  .btn-primary-hero,
+  .btn-secondary-hero {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-stats {
+    width: 100% !important;
+  }
+
+  .hero-img-ring {
+    width: 220px !important;
+    height: 220px !important;
+  }
+
+  .hero-img-ring::before,
+  .hero-img-ring::after {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar .container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .hero-socials {
+    flex-wrap: wrap;
+  }
+}
 /* ══════════════════════════════════════
    SCROLL POPUP SYSTEM
    ══════════════════════════════════════ */
