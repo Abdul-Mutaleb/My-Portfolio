@@ -20,7 +20,7 @@
   <!-- ════ NAVBAR ════ -->
   <nav class="navbar navbar-expand-lg" id="navbar">
     <div class="container">
-      <a class="nav-brand" href="#home"><img src="./img/logo.png" alt="Logo" width="180" height="auto"></a>
+      <a class="nav-brand" href="#home"><img src="./img/Logo.png" alt="Logo" width="180" height="auto"></a>
       <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
         data-bs-target="#navMenu">
         <i class="fas fa-bars" style="color:var(--primary)"></i>
@@ -29,10 +29,28 @@
         <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
           <li class="nav-item"><a class="nav-link" href="#home"><i class="fas fa-house"></i> Home</a></li>
           <li class="nav-item"><a class="nav-link" href="#about"><i class="fas fa-user"></i> About</a></li>
-          <li class="nav-item">
-            <a class="nav-link" href="#services"><i class="fas fa-briefcase"></i> Services</a>
-          </li>
           <li class="nav-item"><a class="nav-link" href="#skills"><i class="fas fa-code"></i> Skills</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#services" role="button" data-bs-toggle="dropdown">
+              <i class="fas fa-briefcase"></i> Services
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#services"><span class="di-icon"><i
+                      class="fas fa-laptop-code"></i></span>Web Development</a></li>
+              <li><a class="dropdown-item" href="#services"><span class="di-icon"><i
+                      class="fab fa-laravel"></i></span>Laravel Development</a></li>
+              <li><a class="dropdown-item" href="#services"><span class="di-icon"><i
+                      class="fas fa-database"></i></span>Database Design</a></li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li><a class="dropdown-item" href="#services"><span class="di-icon"><i
+                      class="fas fa-paint-brush"></i></span>UI/UX Design</a></li>
+              <li><a class="dropdown-item" href="#services"><span class="di-icon"><i class="fas fa-plug"></i></span>API
+                  Development</a></li>
+              <li><a class="dropdown-item" href="#services"><span class="di-icon"><i
+                      class="fas fa-screwdriver-wrench"></i></span>Website Maintenance</a></li>
+            </ul>
           </li>
           <li class="nav-item"><a class="nav-link" href="#projects"><i class="fas fa-folder-open"></i> Projects</a></li>
           <li class="nav-item"><a class="nav-link" href="#education"><i class="fas fa-graduation-cap"></i> Education</a>
@@ -665,7 +683,10 @@
       </div>
     </div>
   </footer>
-
+  <a href="https://wa.me/8801319245857" target="_blank" class="whatsapp-float" title="Chat on WhatsApp"
+    aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
   <button id="stt" title="Back to top"><i class="fas fa-arrow-up"></i></button>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
