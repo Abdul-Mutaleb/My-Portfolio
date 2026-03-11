@@ -7,9 +7,7 @@ const WEB3_KEY = '3837ebc6-0387-4278-8f13-0906af2d0232';
 const TO_EMAIL  = 'abdulmutaleb.puc@gmail.com';
 const CV_PATH   = 'cv/Abdul-Mutaleb-CV.pdf';
 
-/* ══════════════════════════════════════
-   INFINITE TECH SLIDER
-   ══════════════════════════════════════ */
+
 const TECHS = [
   {icon:'fa-brands fa-html5',     label:'HTML5',      color:'#e34f26'},
   {icon:'fa-brands fa-css3-alt',  label:'CSS3',        color:'#264de4'},
