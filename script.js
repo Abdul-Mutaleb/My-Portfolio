@@ -5,7 +5,7 @@
 
 const WEB3_KEY = '3837ebc6-0387-4278-8f13-0906af2d0232';
 const TO_EMAIL  = 'abdulmutaleb.puc@gmail.com';
-const CV_PATH   = 'cv/Abdul-Mutaleb-CV.pdf';
+const CV_PATH   = 'cv/Abdul_Mutaleb_cv.pdf';
 
 
 const TECHS = [
@@ -90,12 +90,12 @@ SKILLS.forEach((s, i) => {
    PROJECTS DATA + RENDER
    ══════════════════════════════════════ */
 const PROJECTS = [
-  {icon:'fa-solid fa-traffic-light', bg:'linear-gradient(135deg,#0d9488,#059669)',cat:'Laravel',catIcon:'fa-brands fa-laravel',title:'Traffic Offense Management System',desc:'Role-based violation management for police departments — offense recording, fine management, vehicle verification, and admin dashboard.',tags:['Laravel','PHP','MySQL','Bootstrap','JavaScript'],github:'https://github.com/Abdul-Mutaleb',demo:'#'},
-  {icon:'fa-solid fa-gavel',         bg:'linear-gradient(135deg,#059669,#14b8a6)',cat:'Laravel',catIcon:'fa-brands fa-laravel',title:'Online Bidding System',desc:'Full-stack auction platform with bidding history, item approval workflow, user authorization, and admin management panel.',tags:['Laravel','PHP','MySQL','Bootstrap','JavaScript'],github:'https://github.com/Abdul-Mutaleb',demo:'#'},
-  {icon:'fa-solid fa-chart-line',    bg:'linear-gradient(135deg,#0f766e,#10b981)',cat:'Laravel',catIcon:'fa-brands fa-laravel',title:'Admin Dashboard',desc:'Real-time analytics panel with charts, user roles, CRUD operations and permission management built with Laravel.',tags:['Laravel','JavaScript','MySQL','Bootstrap'],github:'https://github.com/Abdul-Mutaleb',demo:'#'},
-  {icon:'fa-solid fa-plug',          bg:'linear-gradient(135deg,#14b8a6,#059669)',cat:'PHP',catIcon:'fa-brands fa-php',title:'RESTful API',desc:'Secure REST API with JWT authentication, rate limiting, CRUD endpoints and full Postman documentation.',tags:['PHP','Laravel','MySQL','JSON'],github:'https://github.com/Abdul-Mutaleb',demo:'#'},
-  {icon:'fa-solid fa-newspaper',     bg:'linear-gradient(135deg,#5eead4,#0d9488)',cat:'PHP',catIcon:'fa-brands fa-php',title:'Blog & CMS',desc:'Content management system with rich text editor, SEO tools, categories, tags and comment system.',tags:['PHP','MySQL','CSS','JavaScript'],github:'https://github.com/Abdul-Mutaleb',demo:'#'},
-  {icon:'fa-solid fa-briefcase',     bg:'linear-gradient(135deg,#0d9488,#5eead4)',cat:'Frontend',catIcon:'fa-solid fa-code',title:'Portfolio Website',desc:'Responsive animated portfolio with scroll effects, typed animation, and dynamic project loading.',tags:['HTML','CSS','Bootstrap','JavaScript'],github:'https://github.com/Abdul-Mutaleb',demo:'#'},
+  {icon:'fa-solid fa-traffic-light', bg:'linear-gradient(135deg,#0d9488,#059669)', images:[], cat:'Laravel',catIcon:'fa-brands fa-laravel',title:'Traffic Offense Management System',desc:'Role-based violation management for police departments — offense recording, fine management, vehicle verification, and admin dashboard.',tags:['Laravel','PHP','MySQL','Bootstrap','JavaScript'],github:'https://github.com/Abdul-Mutaleb',demo:'#'},
+  {icon:'fa-solid fa-gavel',         bg:'linear-gradient(135deg,#059669,#14b8a6)', images:[], cat:'Laravel',catIcon:'fa-brands fa-laravel',title:'Online Bidding System',desc:'Full-stack auction platform with bidding history, item approval workflow, user authorization, and admin management panel.',tags:['Laravel','PHP','MySQL','Bootstrap','JavaScript'],github:'https://github.com/Abdul-Mutaleb',demo:'#'},
+  {icon:'fa-solid fa-chart-line',    bg:'linear-gradient(135deg,#0f766e,#10b981)', images:[], cat:'Laravel',catIcon:'fa-brands fa-laravel',title:'Admin Dashboard',desc:'Real-time analytics panel with charts, user roles, CRUD operations and permission management built with Laravel.',tags:['Laravel','JavaScript','MySQL','Bootstrap'],github:'https://github.com/Abdul-Mutaleb',demo:'#'},
+  {icon:'fa-solid fa-plug',          bg:'linear-gradient(135deg,#14b8a6,#059669)', images:[], cat:'PHP',catIcon:'fa-brands fa-php',title:'RESTful API',desc:'Secure REST API with JWT authentication, rate limiting, CRUD endpoints and full Postman documentation.',tags:['PHP','Laravel','MySQL','JSON'],github:'https://github.com/Abdul-Mutaleb',demo:'#'},
+  {icon:'fa-solid fa-newspaper',     bg:'linear-gradient(135deg,#5eead4,#0d9488)', images:[], cat:'PHP',catIcon:'fa-brands fa-php',title:'Blog & CMS',desc:'Content management system with rich text editor, SEO tools, categories, tags and comment system.',tags:['PHP','MySQL','CSS','JavaScript'],github:'https://github.com/Abdul-Mutaleb',demo:'#'},
+  {icon:'fa-solid fa-briefcase',     bg:'linear-gradient(135deg,#0d9488,#5eead4)', images:[], cat:'Frontend',catIcon:'fa-solid fa-code',title:'Portfolio Website',desc:'Responsive animated portfolio with scroll effects, typed animation, and dynamic project loading.',tags:['HTML','CSS','Bootstrap','JavaScript'],github:'https://github.com/Abdul-Mutaleb',demo:'#'},
 ];
 
 const cats     = ['All', ...new Set(PROJECTS.map(p => p.cat))];
@@ -109,31 +109,77 @@ cats.forEach((c, i) => {
   fEl.appendChild(b);
 });
 
+function buildThumb(p) {
+  if (p.images && p.images.length > 0) {
+    const slides = p.images.map((src, idx) =>
+      `<div class="pimg-slide${idx === 0 ? ' active' : ''}" style="background-image:url('${src}')"></div>`
+    ).join('');
+    const hasMany = p.images.length > 1;
+    const nav = hasMany ? `
+      <button class="pimg-nav pimg-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+      <button class="pimg-nav pimg-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>` : '';
+    const dots = hasMany ? `<div class="pimg-dots">${p.images.map((_, idx) =>
+      `<span class="pimg-dot${idx === 0 ? ' active' : ''}" data-i="${idx}"></span>`
+    ).join('')}</div>` : '';
+    return `<div class="proj-thumb proj-thumb-img"><div class="pimg-wrap">${slides}${nav}${dots}</div></div>`;
+  }
+  return `<div class="proj-thumb" style="background:${p.bg}"><div class="proj-thumb-icon"><i class="${p.icon}"></i></div></div>`;
+}
+
 function renderProj(f = 'All') {
   const g    = document.getElementById('proj-grid');
   const list = f === 'All' ? PROJECTS : PROJECTS.filter(p => p.cat === f);
-  g.innerHTML = list.map((p, i) => `
+  g.innerHTML = list.map((p, i) => {
+    const demoDisabled = !p.demo || p.demo === '#';
+    const ghEmpty      = !p.github || p.github === '#';
+    return `
   <div class="col-md-6 col-lg-4" data-pop="up" data-delay="${i * 0.1}">
     <div class="proj-card">
-      <div class="proj-thumb" style="background:${p.bg}">
-        <div class="proj-thumb-icon"><i class="${p.icon}"></i></div>
-        <div class="proj-overlay">
-          <a href="${p.demo}" class="ov-btn" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
-          <a href="${p.github}" target="_blank" class="ov-btn" title="GitHub"><i class="fab fa-github"></i></a>
-        </div>
-      </div>
+      ${buildThumb(p)}
       <div class="proj-body">
         <div class="proj-cat-tag"><i class="${p.catIcon}"></i> ${p.cat}</div>
         <div class="proj-name">${p.title}</div>
         <div class="proj-desc">${p.desc}</div>
         <div class="proj-tags">${p.tags.map(t => `<span class="ptag">${t}</span>`).join('')}</div>
+        <div class="proj-links">
+          <a href="${p.github || '#'}" ${!ghEmpty ? 'target="_blank"' : ''} class="proj-link-btn proj-link-github${ghEmpty ? ' disabled' : ''}">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+          <a href="${p.demo || '#'}" ${!demoDisabled ? 'target="_blank"' : ''} class="proj-link-btn proj-link-demo${demoDisabled ? ' disabled' : ''}">
+            <i class="fas fa-external-link-alt"></i> Live Demo
+          </a>
+        </div>
       </div>
     </div>
-  </div>`).join('');
-  // Re-observe newly rendered items
+  </div>`;
+  }).join('');
   setTimeout(() => observeAll(), 50);
 }
 renderProj();
+
+/* Image slider navigation (event delegation — survives re-renders) */
+document.getElementById('proj-grid').addEventListener('click', e => {
+  const nav = e.target.closest('.pimg-nav');
+  const dot = e.target.closest('.pimg-dot');
+  if (!nav && !dot) return;
+  e.stopPropagation();
+  const wrap   = (nav || dot).closest('.pimg-wrap');
+  const slides = [...wrap.querySelectorAll('.pimg-slide')];
+  const dots   = [...wrap.querySelectorAll('.pimg-dot')];
+  let cur = slides.findIndex(s => s.classList.contains('active'));
+  slides[cur].classList.remove('active');
+  if (dots[cur]) dots[cur].classList.remove('active');
+  let next;
+  if (dot) {
+    next = parseInt(dot.dataset.i);
+  } else {
+    next = nav.classList.contains('pimg-next')
+      ? (cur + 1) % slides.length
+      : (cur - 1 + slides.length) % slides.length;
+  }
+  slides[next].classList.add('active');
+  if (dots[next]) dots[next].classList.add('active');
+});
 
 fEl.addEventListener('click', e => {
   const btn = e.target.closest('.filter-btn');
@@ -249,7 +295,6 @@ if (cvBtn) {
     const link = document.createElement('a');
     link.href     = CV_PATH;
     link.download = 'Abdul-Mutaleb-CV.pdf';
-    link.target   = '_blank';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
